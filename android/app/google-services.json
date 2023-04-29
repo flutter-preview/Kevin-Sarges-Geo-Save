@@ -1,0 +1,118 @@
+{
+  "project_info": {
+    "project_number": "584648687266",
+    "project_id": "unamaps-c7d51",
+    "storage_bucket": "unamaps-c7d51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584648687266:android:e2859c73316cd72573e1fb",
+        "android_client_info": {
+          "package_name": "com.example.geosave"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584648687266-i53u9em6p44dd8opqadpojgqiq95htp5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhpuz-kEY-GcpfILwJnNUSlz8fJdZa34o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584648687266-i53u9em6p44dd8opqadpojgqiq95htp5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "584648687266-rsunh12nrp9jc7hovsojokaonmebar9g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.myGeolocation"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584648687266:android:c2363ffc9307b44b73e1fb",
+        "android_client_info": {
+          "package_name": "com.example.my_geolocation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584648687266-i53u9em6p44dd8opqadpojgqiq95htp5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhpuz-kEY-GcpfILwJnNUSlz8fJdZa34o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584648687266-i53u9em6p44dd8opqadpojgqiq95htp5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "584648687266-rsunh12nrp9jc7hovsojokaonmebar9g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.myGeolocation"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584648687266:android:803d6cd9a4ae36bb73e1fb",
+        "android_client_info": {
+          "package_name": "com.example.unamaps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584648687266-i53u9em6p44dd8opqadpojgqiq95htp5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhpuz-kEY-GcpfILwJnNUSlz8fJdZa34o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584648687266-i53u9em6p44dd8opqadpojgqiq95htp5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "584648687266-rsunh12nrp9jc7hovsojokaonmebar9g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.myGeolocation"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
