@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:geolocator/geolocator.dart';
 import 'package:geosave/app/common/error/common_errors.dart';
 import 'package:geosave/app/features/map/domain/datasource/imap_datasourcer.dart';
@@ -23,7 +21,7 @@ class MapDataSource implements MapDataSourceImpl {
       final local = await Geolocator.getCurrentPosition();
 
       return local;
-    } on PositionError catch (e) {
+    } on PositionUpdateException catch (e) {
       throw CommonDesconhecidoError(message: e.message);
     }
   }

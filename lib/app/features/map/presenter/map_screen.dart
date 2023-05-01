@@ -57,6 +57,8 @@ class _MapScreenState extends State<MapScreen> {
 
             if (state is MapSucesso) {
               return GoogleMap(
+                myLocationEnabled: true,
+                zoomControlsEnabled: false,
                 mapType: MapType.normal,
                 initialCameraPosition: CameraPosition(
                   target: LatLng(
