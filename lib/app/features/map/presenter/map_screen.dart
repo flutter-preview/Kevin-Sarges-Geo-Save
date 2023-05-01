@@ -4,6 +4,7 @@ import 'package:geosave/app/features/map/presenter/controller/map_cubit.dart';
 import 'package:geosave/app/features/map/presenter/controller/map_state.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:geosave/app/features/map/presenter/widgets/button_map_widget.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);
@@ -75,6 +76,26 @@ class _MapScreenState extends State<MapScreen> {
               color: Colors.red,
             );
           },
+        ),
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 0,
+            horizontal: 5,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              ButtoMapWidget(
+                onPress: () {},
+                text: 'Atualizar',
+              ),
+              const SizedBox(width: 12),
+              ButtoMapWidget(
+                onPress: () {},
+                text: 'Salvar',
+              ),
+            ],
+          ),
         ),
       ),
     );
