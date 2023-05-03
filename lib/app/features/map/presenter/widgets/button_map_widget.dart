@@ -16,10 +16,10 @@ class ButtoMapWidget extends StatelessWidget {
       onPressed: onPress,
       style: ButtonStyle(
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-          side: const BorderSide(color: Colors.red),
-        )),
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
       ),
       child: Text(text),
     );

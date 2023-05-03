@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geosave/app/common/routes/app_routes.dart';
 import 'package:geosave/app/features/map/presenter/controller/map_cubit.dart';
 import 'package:geosave/app/features/map/presenter/controller/map_state.dart';
 import 'package:get_it/get_it.dart';
@@ -15,6 +16,8 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   final _cubit = GetIt.I.get<MapCubit>();
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
   late GoogleMapController _controller;
 
   void _onCreatedMap(GoogleMapController controller) {
@@ -36,7 +39,9 @@ class _MapScreenState extends State<MapScreen> {
           title: const Text('Sua localização'),
           actions: [
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.list);
+              },
               child: const Text('Locais Salvos'),
             ),
           ],
@@ -78,20 +83,27 @@ class _MapScreenState extends State<MapScreen> {
           },
         ),
         floatingActionButton: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 0,
-            horizontal: 5,
+          padding: const EdgeInsets.fromLTRB(
+            20,
+            0,
+            0,
+            10,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               ButtoMapWidget(
-                onPress: () {},
+                onPress: () {
+                  _cubit.localizacaoUsuario();
+                  _refreshIndicatorKey.currentState?.show();
+                },
                 text: 'Atualizar',
               ),
               const SizedBox(width: 12),
               ButtoMapWidget(
-                onPress: () {},
+                onPress: () {
+                  Navigator.pushNamed(context, AppRoutes.save);
+                },
                 text: 'Salvar',
               ),
             ],
