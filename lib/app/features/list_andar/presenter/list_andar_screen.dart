@@ -24,8 +24,6 @@ class _ListAndarScreenState extends State<ListAndarScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Andares'),
@@ -60,7 +58,6 @@ class _ListAndarScreenState extends State<ListAndarScreen> {
                 itemBuilder: (context, index) {
                   return AndarContainerWidget(
                     text: state.andares[index].andar,
-                    width: width,
                   );
                 },
                 separatorBuilder: (context, index) => const Divider(),

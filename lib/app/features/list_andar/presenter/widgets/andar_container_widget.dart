@@ -5,14 +5,14 @@ class AndarContainerWidget extends StatelessWidget {
   const AndarContainerWidget({
     Key? key,
     required this.text,
-    required this.width,
   }) : super(key: key);
 
-  final double width;
   final String text;
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return GestureDetector(
       onTap: () {
         Navigator.push(

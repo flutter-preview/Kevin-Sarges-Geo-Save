@@ -1,5 +1,5 @@
 class LocalEntity {
-  String? id;
+  String id;
   String nomeLocal;
   String tipoLocal;
   String marker;
