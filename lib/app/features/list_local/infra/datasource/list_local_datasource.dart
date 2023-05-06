@@ -20,7 +20,7 @@ class ListLocalDataSource implements ListLocalDataSourceImpl {
         final data = doc.data();
 
         return LocalModel(
-          doc.id,
+          id: doc.id,
           lat: data['lat'] as double,
           lon: data['lon'] as double,
           marker: data['marker'] as String,
