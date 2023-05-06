@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geosave/app/common/entity/local_entity.dart';
-import 'package:geosave/app/features/list_local/presenter/list_local_screen.dart';
+import 'package:geosave/app/features/list_andar/presenter/list_andar_screen.dart';
 import 'package:geosave/app/features/local/presenter/controller/local_cubit.dart';
 import 'package:geosave/app/features/local/presenter/controller/local_state.dart';
 import 'package:get_it/get_it.dart';
@@ -39,7 +39,7 @@ class LocalScreen extends StatelessWidget {
               Navigator.pop(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ListLocalScreen(andar: andar),
+                  builder: (context) => const ListAndarScreen(),
                 ),
               );
               return;

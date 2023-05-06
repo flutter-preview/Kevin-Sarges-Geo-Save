@@ -23,6 +23,7 @@ class SaveScreen extends StatefulWidget {
 class _SaveScreenState extends State<SaveScreen> {
   final _cubit = GetIt.I.get<SaveCubit>();
   String _andares = ListAndares.andares.first;
+  bool _clickButton = false;
   late Map<String, dynamic> _iconLocais = ListIconLocal.listIconLocal.first;
   final _controllerTextTipoLocal = TextEditingController();
   final _controllerTextNomeLocal = TextEditingController();
@@ -208,23 +209,38 @@ class _SaveScreenState extends State<SaveScreen> {
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          final local = await Geolocator.getCurrentPosition();
-                          _cubit.saveLocal(
-                            _andares,
-                            LocalModel(
-                              id: uuid.v4(),
-                              lat: local.latitude,
-                              lon: local.longitude,
-                              marker: _iconLocais['marker'],
-                              nomeLocal: _controllerTextNomeLocal.text,
-                              tipoLocal: _controllerTextTipoLocal.text,
-                            ),
-                          );
-                        }
-                      },
-                      child: const Text('Salvar'),
+                      onPressed: _clickButton == false
+                          ? () async {
+                              if (_formKey.currentState!.validate()) {
+                                final local =
+                                    await Geolocator.getCurrentPosition();
+                                _cubit.saveLocal(
+                                  _andares,
+                                  LocalModel(
+                                    id: uuid.v4(),
+                                    lat: local.latitude,
+                                    lon: local.longitude,
+                                    marker: _iconLocais['marker'],
+                                    nomeLocal: _controllerTextNomeLocal.text,
+                                    tipoLocal: _controllerTextTipoLocal.text,
+                                  ),
+                                );
+
+                                setState(() {
+                                  _clickButton = true;
+                                });
+                              }
+                            }
+                          : null,
+                      child: _clickButton
+                          ? const SizedBox(
+                              width: 10,
+                              height: 10,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            )
+                          : const Text('Salvar'),
                     ),
                   ],
                 ),
