@@ -120,7 +120,7 @@ class LocalScreen extends StatelessWidget {
               const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () {
-                  _cubit.delete(local.id!, andar);
+                  _cubit.delete(local.id, andar);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,

@@ -2,7 +2,7 @@ import 'package:geosave/app/common/entity/local_entity.dart';
 
 class LocalModel extends LocalEntity {
   LocalModel({
-    super.id,
+    required super.id,
     required super.lat,
     required super.lon,
     required super.marker,
@@ -12,6 +12,7 @@ class LocalModel extends LocalEntity {
 
   factory LocalModel.fromJson(Map<String, dynamic> json) {
     return LocalModel(
+      id: json['id'],
       lat: json['lat'],
       lon: json['lon'],
       marker: json['marker'],

@@ -1,5 +1,5 @@
 class LocalEntity {
-  String? id;
+  String id;
   String nomeLocal;
   String tipoLocal;
   String marker;
@@ -7,7 +7,7 @@ class LocalEntity {
   double lon;
 
   LocalEntity({
-    this.id,
+    required this.id,
     required this.lat,
     required this.lon,
     required this.marker,

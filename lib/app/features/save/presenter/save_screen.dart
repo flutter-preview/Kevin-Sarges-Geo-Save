@@ -9,6 +9,9 @@ import 'package:geosave/app/features/save/presenter/controller/save_state.dart';
 import 'package:geosave/app/common/strings/list_andar.dart';
 import 'package:geosave/app/features/save/presenter/widget/input_widget.dart';
 import 'package:get_it/get_it.dart';
+import 'package:uuid/uuid.dart';
+
+var uuid = const Uuid();
 
 class SaveScreen extends StatefulWidget {
   const SaveScreen({Key? key}) : super(key: key);
@@ -211,6 +214,7 @@ class _SaveScreenState extends State<SaveScreen> {
                           _cubit.saveLocal(
                             _andares,
                             LocalModel(
+                              id: uuid.v4(),
                               lat: local.latitude,
                               lon: local.longitude,
                               marker: _iconLocais['marker'],
