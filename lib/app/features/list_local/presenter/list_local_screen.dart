@@ -54,24 +54,35 @@ class _ListLocalScreenState extends State<ListLocalScreen> {
               }
 
               if (state is ListLocalSucesso) {
-                return ListView.separated(
-                  itemCount: state.locais.length,
-                  padding: const EdgeInsets.fromLTRB(
-                    12,
-                    20,
-                    12,
-                    0,
-                  ),
-                  itemBuilder: (context, index) {
-                    return LocalContainer(
-                      local: state.locais[index],
-                      nomeLocal: state.locais[index].nomeLocal,
-                      marker: state.locais[index].marker,
-                      andar: widget.andar,
-                    );
-                  },
-                  separatorBuilder: (context, index) => const Divider(),
-                );
+                if (state.locais.isEmpty) {
+                  return const Center(
+                    child: Text(
+                      'No moneto não tem nenhum local salvo !!',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  );
+                } else {
+                  return ListView.separated(
+                    itemCount: state.locais.length,
+                    padding: const EdgeInsets.fromLTRB(
+                      12,
+                      20,
+                      12,
+                      0,
+                    ),
+                    itemBuilder: (context, index) {
+                      return LocalContainer(
+                        local: state.locais[index],
+                        nomeLocal: state.locais[index].nomeLocal,
+                        marker: state.locais[index].marker,
+                        andar: widget.andar,
+                      );
+                    },
+                    separatorBuilder: (context, index) => const Divider(),
+                  );
+                }
               }
 
               return Container(
