@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geosave/app/common/model/local_model.dart';
+import 'package:geosave/app/common/routes/app_routes.dart';
 import 'package:geosave/app/common/strings/list_icon_local.dart';
-import 'package:geosave/app/features/list_andar/presenter/list_andar_screen.dart';
 import 'package:geosave/app/features/save/presenter/controller/save_cubit.dart';
 import 'package:geosave/app/features/save/presenter/controller/save_state.dart';
 import 'package:geosave/app/common/strings/list_andar.dart';
@@ -22,12 +22,12 @@ class SaveScreen extends StatefulWidget {
 
 class _SaveScreenState extends State<SaveScreen> {
   final _cubit = GetIt.I.get<SaveCubit>();
-  String _andares = ListAndares.andares.first;
-  bool _clickButton = false;
-  late Map<String, dynamic> _iconLocais = ListIconLocal.listIconLocal.first;
   final _controllerTextTipoLocal = TextEditingController();
   final _controllerTextNomeLocal = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  late Map<String, dynamic> _iconLocais = ListIconLocal.listIconLocal.first;
+  String _andares = ListAndares.andares.first;
+  bool _clickButton = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class _SaveScreenState extends State<SaveScreen> {
             if (state is SaveErro) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text('Erro ao salvar o local'),
+                  content: Text('Erro ao salvar o local 🤔 '),
                 ),
               );
 
@@ -56,12 +56,7 @@ class _SaveScreenState extends State<SaveScreen> {
                 ),
               );
 
-              Navigator.pop(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ListAndarScreen(),
-                ),
-              );
+              Navigator.popAndPushNamed(context, AppRoutes.map);
               return;
             }
           },
@@ -232,6 +227,12 @@ class _SaveScreenState extends State<SaveScreen> {
                               }
                             }
                           : null,
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 5,
+                          horizontal: 30,
+                        ),
+                      ),
                       child: _clickButton
                           ? const SizedBox(
                               width: 10,
@@ -240,7 +241,12 @@ class _SaveScreenState extends State<SaveScreen> {
                                 color: Colors.white,
                               ),
                             )
-                          : const Text('Salvar'),
+                          : const Text(
+                              'Salvar',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                     ),
                   ],
                 ),
