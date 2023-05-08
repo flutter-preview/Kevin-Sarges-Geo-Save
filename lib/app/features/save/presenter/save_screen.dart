@@ -56,7 +56,7 @@ class _SaveScreenState extends State<SaveScreen> {
                 ),
               );
 
-              Navigator.popAndPushNamed(context, AppRoutes.map);
+              Navigator.pushReplacementNamed(context, AppRoutes.list);
               return;
             }
           },

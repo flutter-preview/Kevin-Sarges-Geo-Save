@@ -61,7 +61,7 @@ class _LocalScreenState extends State<LocalScreen> {
                 ),
               );
 
-              Navigator.popAndPushNamed(context, AppRoutes.map);
+              Navigator.pushReplacementNamed(context, AppRoutes.list);
               return;
             }
           },
