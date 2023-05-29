@@ -11,7 +11,7 @@ class ListIconLocal {
     },
     {'tipoLocal': 'Bebedouro', 'marker': 'assets/images/bebedouro.png'},
     {'tipoLocal': 'Clinica', 'marker': 'assets/images/clinica.png'},
-    {'tipoLocal': 'Elevadores', 'marker': 'assets/images/elevador.png'},
+    {'tipoLocal': 'Elevador', 'marker': 'assets/images/elevador.png'},
     {'tipoLocal': 'Laboratório', 'marker': 'assets/images/LAB.png'},
     {'tipoLocal': 'Atendimento', 'marker': 'assets/images/CRA.png'},
     {'tipoLocal': 'Auditório', 'marker': 'assets/images/auditorio.png'},
