@@ -11,7 +11,7 @@ class ListLocalDataSource implements ListLocalDataSourceImpl {
   final _openDb = DatabaseHelper();
 
   @override
-  Future<List<LocalEntity>> getLocais(String andar) async {
+  Future<List<LocalEntity>> getLocais() async {
     try {
       final database = await _openDb.openDb();
       final result = await database.query(StringsApp.nomeTabela);

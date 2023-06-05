@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:geosave/app/common/colors/colors_app.dart';
 import 'package:geosave/app/common/routes/app_routes.dart';
+import 'package:geosave/app/features/list_local/presenter/list_local_screen.dart';
 import 'package:geosave/app/features/map/presenter/map_screen.dart';
-import 'package:geosave/app/features/save/presenter/save_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,11 +14,18 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
+        appBarTheme: Theme.of(context).appBarTheme.copyWith(
+              systemOverlayStyle: const SystemUiOverlayStyle(
+                statusBarBrightness: Brightness.dark,
+                statusBarColor: ColorsApp.green100,
+                statusBarIconBrightness: Brightness.light,
+              ),
+            ),
       ),
       routes: {
         AppRoutes.map: (context) => const MapScreen(),
-        AppRoutes.save: (context) => const SaveScreen(),
+        AppRoutes.list: (context) => const ListLocalScreen(),
       },
     );
   }

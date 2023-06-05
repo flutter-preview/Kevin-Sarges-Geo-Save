@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geosave/app/common/colors/colors_app.dart';
 
 class ButtoMapWidget extends StatelessWidget {
   const ButtoMapWidget({
@@ -14,11 +15,10 @@ class ButtoMapWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPress,
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: ColorsApp.green100,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
         ),
       ),
       child: Text(text),

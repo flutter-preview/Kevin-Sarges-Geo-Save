@@ -6,9 +6,7 @@ import 'package:geosave/app/features/list_local/presenter/widgets/local_containe
 import 'package:get_it/get_it.dart';
 
 class ListLocalScreen extends StatefulWidget {
-  const ListLocalScreen({Key? key, required this.andar}) : super(key: key);
-
-  final String andar;
+  const ListLocalScreen({Key? key}) : super(key: key);
 
   @override
   State<ListLocalScreen> createState() => _ListLocalScreenState();
@@ -21,7 +19,7 @@ class _ListLocalScreenState extends State<ListLocalScreen> {
   void initState() {
     super.initState();
 
-    _cubit.getLocais(widget.andar);
+    _cubit.getLocais();
   }
 
   @override
@@ -33,7 +31,7 @@ class _ListLocalScreenState extends State<ListLocalScreen> {
       body: SafeArea(
         child: RefreshIndicator(
           onRefresh: () {
-            final locais = _cubit.getLocais(widget.andar);
+            final locais = _cubit.getLocais();
             return locais;
           },
           child: BlocBuilder<ListLocalCubit, ListLocalState>(

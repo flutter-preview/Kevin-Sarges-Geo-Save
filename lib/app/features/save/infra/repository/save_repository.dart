@@ -10,12 +10,9 @@ class SaveRepository implements SaveRepositoryImpl {
   SaveRepository({required this.dataSource});
 
   @override
-  Future<Either<Failure, void>> saveLocal(
-    LocalModel local,
-    String andar,
-  ) async {
+  Future<Either<Failure, void>> saveLocal(LocalModel local) async {
     try {
-      final result = await dataSource.saveLocal(local, andar);
+      final result = await dataSource.saveLocal(local);
 
       return Right(result);
     } on Failure catch (e) {

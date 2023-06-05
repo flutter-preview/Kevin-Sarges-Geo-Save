@@ -10,7 +10,7 @@ class StringsApp {
       $id TEXT PRIMARY KEY,
       $lat REAL,
       $lon REAL,
-      $nomeLocal TEXT,
+      $nomeLocal TEXT
     )
  ''';
 }

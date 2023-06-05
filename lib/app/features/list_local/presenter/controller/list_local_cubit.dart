@@ -9,10 +9,10 @@ class ListLocalCubit extends Cubit<ListLocalState> {
 
   final GetLocaisUseCase getLocaisUseCase;
 
-  Future<void> getLocais(String local) async {
+  Future<void> getLocais() async {
     emit(ListLocalCarregando());
 
-    final result = await getLocaisUseCase(local);
+    final result = await getLocaisUseCase();
 
     result.fold(
       (erro) => emit(ListLocalErro(erro)),

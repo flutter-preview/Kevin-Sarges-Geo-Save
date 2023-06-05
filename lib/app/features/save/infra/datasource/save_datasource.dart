@@ -10,14 +10,18 @@ class SaveDataSource implements SaveDataSourceImpl {
   final _openDb = DatabaseHelper();
 
   @override
-  Future<void> saveLocal(LocalModel local, String andar) async {
+  Future<void> saveLocal(LocalModel local) async {
     try {
       final database = await _openDb.openDb();
 
       await database.transaction((txn) async {
         await txn.rawInsert('''
-          INSERT INTO ${StringsApp.nomeTabela}(id, lat, lon, marker, nomeLocal, tipoLocal)
-          VALUES(?, ?, ?, ?, ?, ?)
+          INSERT INTO ${StringsApp.nomeTabela}(
+            ${StringsApp.id}, 
+            ${StringsApp.lat}, 
+            ${StringsApp.lon}, 
+            ${StringsApp.nomeLocal}
+          ) VALUES(?, ?, ?, ?)
         ''', [
           local.id,
           local.lat,

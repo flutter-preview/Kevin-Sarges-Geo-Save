@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geosave/app/common/model/local_model.dart';
 import 'package:geosave/app/common/routes/app_routes.dart';
 import 'package:geosave/app/features/save/presenter/controller/save_cubit.dart';
 import 'package:geosave/app/features/save/presenter/controller/save_state.dart';
+import 'package:geosave/app/features/save/presenter/widget/input_widget.dart';
 import 'package:get_it/get_it.dart';
 import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
 
 class SaveScreen extends StatefulWidget {
-  const SaveScreen({Key? key}) : super(key: key);
+  SaveScreen({
+    Key? key,
+    required this.lat,
+    required this.lon,
+  }) : super(key: key);
+
+  double lat;
+  double lon;
 
   @override
   State<SaveScreen> createState() => _SaveScreenState();
@@ -17,10 +26,9 @@ class SaveScreen extends StatefulWidget {
 
 class _SaveScreenState extends State<SaveScreen> {
   final _cubit = GetIt.I.get<SaveCubit>();
-  // final _controllerTextTipoLocal = TextEditingController();
-  // final _controllerTextNomeLocal = TextEditingController();
-  // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  // final bool _clickButton = false;
+  final _controllerTextNomeLocal = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final bool _clickButton = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,30 +38,109 @@ class _SaveScreenState extends State<SaveScreen> {
       ),
       body: SafeArea(
         child: BlocListener<SaveCubit, SaveState>(
-            bloc: _cubit,
-            listener: (context, state) {
-              if (state is SaveErro) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Erro ao salvar o local 🤔 '),
+          bloc: _cubit,
+          listener: (context, state) {
+            if (state is SaveErro) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Erro ao salvar o local 🤔 '),
+                ),
+              );
+
+              return;
+            }
+
+            if (state is SaveSucesso) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Local salvo com sucesso 🙂'),
+                ),
+              );
+
+              Navigator.pushReplacementNamed(context, AppRoutes.list);
+              return;
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(
+              19,
+              52,
+              19,
+              0,
+            ),
+            child: ListView(
+              children: [
+                const Center(
+                  child: Text(
+                    'Sua latitude e longitude',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                );
-
-                return;
-              }
-
-              if (state is SaveSucesso) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Local salvo com sucesso 🙂'),
+                ),
+                const SizedBox(height: 33),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Latitude:',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                        Text(
+                          widget.lat.toString(),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Longitude:',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                        Text(widget.lon.toString()),
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Form(
+                  key: _formKey,
+                  child: InputWidget(
+                    controller: _controllerTextNomeLocal,
+                    hintText: 'Ex: Escola',
+                    label: 'Nome para o local:',
                   ),
-                );
-
-                Navigator.pushReplacementNamed(context, AppRoutes.list);
-                return;
-              }
-            },
-            child: Container()),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _cubit.saveLocal(
+                        LocalModel(
+                          id: uuid.v4(),
+                          lat: widget.lat,
+                          lon: widget.lon,
+                          nomeLocal: _controllerTextNomeLocal.text,
+                        ),
+                      );
+                    }
+                  },
+                  child: const Text('Salvar'),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

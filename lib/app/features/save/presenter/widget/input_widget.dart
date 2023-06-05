@@ -17,13 +17,9 @@ class InputWidget extends StatelessWidget {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
+        border: const OutlineInputBorder(),
         hintText: hintText,
-        label: Text(
-          label,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        label: Text(label),
       ),
       validator: (String? value) {
         if (value == null || value.isEmpty) {
