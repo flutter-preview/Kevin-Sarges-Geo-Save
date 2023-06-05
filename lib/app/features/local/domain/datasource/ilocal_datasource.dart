@@ -1,5 +1,3 @@
 abstract class LocalDataSourceImpl {
-  Future<void> deleteLocal(
-    String id,
-  );
+  Future<void> deleteLocal(String id);
 }

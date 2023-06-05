@@ -1,20 +1,24 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geosave/app/common/error/common_errors.dart';
+import 'package:geosave/app/common/helpers/open_database.dart';
+import 'package:geosave/app/common/strings/strings_app.dart';
 import 'package:geosave/app/features/local/domain/datasource/ilocal_datasource.dart';
+import 'package:sqflite/sqflite.dart';
 
 class LocalDataSource implements LocalDataSourceImpl {
-  final firebase = FirebaseFirestore.instance;
+  final _openDb = DatabaseHelper();
 
   @override
-  Future<void> deleteLocal(
-    String id,
-  ) async {
+  Future<void> deleteLocal(String id) async {
     try {
-      final db = await firebase.collection('unama').doc(id).delete();
+      final delete = await _openDb.openDb();
 
-      return db;
-    } on FirebaseException catch (e) {
-      throw CommonDesconhecidoError(message: e.message);
+      await delete.delete(
+        StringsApp.nomeTabela,
+        where: 'id = ?',
+        whereArgs: [id],
+      );
+    } on DatabaseException catch (e) {
+      throw CommonDesconhecidoError(message: e.toString());
     }
   }
 }

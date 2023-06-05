@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geosave/app/common/entity/local_entity.dart';
@@ -6,6 +8,7 @@ import 'package:geosave/app/features/local/presenter/controller/local_cubit.dart
 import 'package:geosave/app/features/local/presenter/controller/local_state.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:geosave/app/features/local/presenter/widget/column_widget.dart';
 
 class LocalScreen extends StatefulWidget {
   const LocalScreen({
@@ -34,9 +37,7 @@ class _LocalScreenState extends State<LocalScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          widget.local.nomeLocal,
-        ),
+        title: const Text('Local que você salvo'),
       ),
       body: SafeArea(
         child: BlocListener<LocalCubit, LocalState>(
@@ -59,7 +60,11 @@ class _LocalScreenState extends State<LocalScreen> {
                 ),
               );
 
-              Navigator.pushReplacementNamed(context, AppRoutes.list);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                AppRoutes.map,
+                (_) => false,
+              );
               return;
             }
           },
@@ -105,34 +110,20 @@ class _LocalScreenState extends State<LocalScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Tipo do local:',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 3),
-                    ],
+                  ColumnWidget(
+                    title: 'Latitude:',
+                    subtitle: widget.local.lat.toString(),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Nome do local:',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 3),
-                      Text(widget.local.nomeLocal),
-                    ],
+                  ColumnWidget(
+                    title: 'Longitude:',
+                    subtitle: widget.local.lon.toString(),
                   ),
                 ],
+              ),
+              const SizedBox(height: 10),
+              ColumnWidget(
+                subtitle: widget.local.nomeLocal,
+                title: 'Nome do local',
               ),
               const SizedBox(height: 30),
               ElevatedButton(

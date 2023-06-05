@@ -62,21 +62,20 @@ class _ListLocalScreenState extends State<ListLocalScreen> {
                     ),
                   );
                 } else {
-                  return ListView.separated(
+                  return GridView.builder(
                     itemCount: state.locais.length,
-                    padding: const EdgeInsets.fromLTRB(
-                      12,
-                      20,
-                      12,
-                      0,
+                    padding: const EdgeInsets.fromLTRB(12, 20, 12, 0),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
                     ),
                     itemBuilder: (context, index) {
                       return LocalContainer(
                         local: state.locais[index],
-                        nomeLocal: state.locais[index].nomeLocal,
                       );
                     },
-                    separatorBuilder: (context, index) => const Divider(),
                   );
                 }
               }

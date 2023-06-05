@@ -5,11 +5,9 @@ import 'package:geosave/app/features/local/presenter/local_screen.dart';
 class LocalContainer extends StatelessWidget {
   const LocalContainer({
     Key? key,
-    required this.nomeLocal,
     required this.local,
   }) : super(key: key);
 
-  final String nomeLocal;
   final LocalEntity local;
 
   @override
@@ -30,18 +28,27 @@ class LocalContainer extends StatelessWidget {
       child: Container(
         width: width * 0.3,
         height: 50,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 10,
+        ),
         decoration: BoxDecoration(
           color: const Color.fromARGB(255, 216, 216, 216),
           borderRadius: BorderRadius.circular(5),
         ),
-        child: Row(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            Image.asset(
+              'assets/images/pino-de-localizacao.png',
+              width: width * 0.2,
+            ),
             Text(
-              nomeLocal,
+              local.nomeLocal,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ],

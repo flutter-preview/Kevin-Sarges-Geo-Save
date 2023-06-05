@@ -1,6 +1,9 @@
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geosave/app/common/colors/colors_app.dart';
+import 'package:geosave/app/common/helpers/open_database.dart';
 import 'package:geosave/app/common/routes/app_routes.dart';
 import 'package:geosave/app/features/map/presenter/controller/map_cubit.dart';
 import 'package:geosave/app/features/map/presenter/controller/map_state.dart';
@@ -21,6 +24,7 @@ class _MapScreenState extends State<MapScreen> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
   late GoogleMapController _controller;
+  final db = DatabaseHelper();
 
   void _onCreatedMap(GoogleMapController controller) {
     _controller = controller;

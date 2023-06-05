@@ -1,5 +1,8 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geosave/app/common/helpers/open_database.dart';
 import 'package:geosave/app/common/model/local_model.dart';
 import 'package:geosave/app/common/routes/app_routes.dart';
 import 'package:geosave/app/features/save/presenter/controller/save_cubit.dart';
@@ -28,7 +31,13 @@ class _SaveScreenState extends State<SaveScreen> {
   final _cubit = GetIt.I.get<SaveCubit>();
   final _controllerTextNomeLocal = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final bool _clickButton = false;
+  late bool _clickButton = false;
+  final db = DatabaseHelper();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +50,10 @@ class _SaveScreenState extends State<SaveScreen> {
           bloc: _cubit,
           listener: (context, state) {
             if (state is SaveErro) {
+              setState(() {
+                _clickButton = false;
+              });
+
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('Erro ao salvar o local 🤔 '),
@@ -123,18 +136,24 @@ class _SaveScreenState extends State<SaveScreen> {
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _cubit.saveLocal(
-                        LocalModel(
-                          id: uuid.v4(),
-                          lat: widget.lat,
-                          lon: widget.lon,
-                          nomeLocal: _controllerTextNomeLocal.text,
-                        ),
-                      );
-                    }
-                  },
+                  onPressed: _clickButton
+                      ? null
+                      : () {
+                          if (_formKey.currentState!.validate()) {
+                            _cubit.saveLocal(
+                              LocalModel(
+                                id: uuid.v4(),
+                                lat: widget.lat,
+                                lon: widget.lon,
+                                nomeLocal: _controllerTextNomeLocal.text,
+                              ),
+                            );
+
+                            setState(() {
+                              _clickButton = true;
+                            });
+                          }
+                        },
                   child: const Text('Salvar'),
                 ),
               ],
