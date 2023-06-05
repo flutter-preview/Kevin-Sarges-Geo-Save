@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geosave/app/common/colors/colors_app.dart';
 import 'package:geosave/app/common/helpers/open_database.dart';
 import 'package:geosave/app/common/model/local_model.dart';
 import 'package:geosave/app/common/routes/app_routes.dart';
@@ -154,7 +155,15 @@ class _SaveScreenState extends State<SaveScreen> {
                             });
                           }
                         },
-                  child: const Text('Salvar'),
+                  child: _clickButton
+                      ? const SizedBox(
+                          width: 10,
+                          height: 10,
+                          child: CircularProgressIndicator(
+                            color: ColorsApp.white100,
+                          ),
+                        )
+                      : const Text('Salvar'),
                 ),
               ],
             ),

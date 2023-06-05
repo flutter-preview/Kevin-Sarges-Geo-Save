@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geosave/app/common/colors/colors_app.dart';
+import 'package:geosave/app/common/widget/loading_widget.dart';
 import 'package:geosave/app/features/list_local/presenter/controller/list_local_cubit.dart';
 import 'package:geosave/app/features/list_local/presenter/controller/list_local_state.dart';
 import 'package:geosave/app/features/list_local/presenter/widgets/local_container.dart';
@@ -39,9 +41,7 @@ class _ListLocalScreenState extends State<ListLocalScreen> {
             builder: (context, state) {
               if (state is ListLocalCarregando) {
                 return const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.blue,
-                  ),
+                  child: LoadingWidget(),
                 );
               }
 
@@ -81,7 +81,7 @@ class _ListLocalScreenState extends State<ListLocalScreen> {
               }
 
               return Container(
-                color: Colors.amber,
+                color: ColorsApp.red100,
               );
             },
           ),

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geosave/app/common/colors/colors_app.dart';
 import 'package:geosave/app/common/helpers/open_database.dart';
 import 'package:geosave/app/common/routes/app_routes.dart';
+import 'package:geosave/app/common/widget/loading_widget.dart';
 import 'package:geosave/app/features/map/presenter/controller/map_cubit.dart';
 import 'package:geosave/app/features/map/presenter/controller/map_state.dart';
 import 'package:geosave/app/features/map/presenter/widgets/button_map_widget.dart';
@@ -60,11 +61,7 @@ class _MapScreenState extends State<MapScreen> {
           bloc: _cubit,
           builder: (context, state) {
             if (state is MapCarregando) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: ColorsApp.green100,
-                ),
-              );
+              return const Center(child: LoadingWidget());
             }
 
             if (state is MapErro) {
@@ -127,7 +124,7 @@ class _MapScreenState extends State<MapScreen> {
             }
 
             return Container(
-              color: Colors.red,
+              color: ColorsApp.red100,
             );
           },
         ),

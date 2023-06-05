@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geosave/app/common/colors/colors_app.dart';
 import 'package:geosave/app/common/entity/local_entity.dart';
 import 'package:geosave/app/common/routes/app_routes.dart';
 import 'package:geosave/app/features/local/presenter/controller/local_cubit.dart';
@@ -136,13 +137,15 @@ class _LocalScreenState extends State<LocalScreen> {
                         });
                       },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
+                  backgroundColor: ColorsApp.red100,
                 ),
                 child: _clickButton
                     ? const SizedBox(
                         width: 10,
                         height: 10,
-                        child: CircularProgressIndicator(color: Colors.white),
+                        child: CircularProgressIndicator(
+                          color: ColorsApp.white100,
+                        ),
                       )
                     : const Text('Deletar local'),
               ),
