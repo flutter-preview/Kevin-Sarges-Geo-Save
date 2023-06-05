@@ -76,8 +76,6 @@ class _ListLocalScreenState extends State<ListLocalScreen> {
                       return LocalContainer(
                         local: state.locais[index],
                         nomeLocal: state.locais[index].nomeLocal,
-                        marker: state.locais[index].marker,
-                        andar: widget.andar,
                       );
                     },
                     separatorBuilder: (context, index) => const Divider(),

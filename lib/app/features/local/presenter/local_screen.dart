@@ -11,11 +11,9 @@ class LocalScreen extends StatefulWidget {
   const LocalScreen({
     Key? key,
     required this.local,
-    required this.andar,
   }) : super(key: key);
 
   final LocalEntity local;
-  final String andar;
 
   @override
   State<LocalScreen> createState() => _LocalScreenState();
@@ -107,18 +105,17 @@ class _LocalScreenState extends State<LocalScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Tipo do local:',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 3),
-                      Text(widget.local.tipoLocal),
+                      SizedBox(height: 3),
                     ],
                   ),
                   Column(
@@ -142,7 +139,7 @@ class _LocalScreenState extends State<LocalScreen> {
                 onPressed: _clickButton
                     ? null
                     : () {
-                        _cubit.delete(widget.local.id, widget.andar);
+                        _cubit.delete(widget.local.id);
                         setState(() {
                           _clickButton = true;
                         });

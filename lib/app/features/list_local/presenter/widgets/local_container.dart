@@ -6,15 +6,11 @@ class LocalContainer extends StatelessWidget {
   const LocalContainer({
     Key? key,
     required this.nomeLocal,
-    required this.marker,
     required this.local,
-    required this.andar,
   }) : super(key: key);
 
   final String nomeLocal;
-  final String marker;
   final LocalEntity local;
-  final String andar;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +23,6 @@ class LocalContainer extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => LocalScreen(
               local: local,
-              andar: andar,
             ),
           ),
         );
@@ -42,11 +37,6 @@ class LocalContainer extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Image.asset(
-              marker,
-              fit: BoxFit.cover,
-              width: 25,
-            ),
             Text(
               nomeLocal,
               style: const TextStyle(

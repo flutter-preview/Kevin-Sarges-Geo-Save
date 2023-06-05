@@ -6,14 +6,11 @@ class LocalDataSource implements LocalDataSourceImpl {
   final firebase = FirebaseFirestore.instance;
 
   @override
-  Future<void> deleteLocal(String id, String andar) async {
+  Future<void> deleteLocal(
+    String id,
+  ) async {
     try {
-      final db = await firebase
-          .collection('unama')
-          .doc(andar)
-          .collection('locais')
-          .doc(id)
-          .delete();
+      final db = await firebase.collection('unama').doc(id).delete();
 
       return db;
     } on FirebaseException catch (e) {

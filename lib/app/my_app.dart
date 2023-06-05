@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:geosave/app/common/routes/app_routes.dart';
-import 'package:geosave/app/features/list_andar/presenter/list_andar_screen.dart';
 import 'package:geosave/app/features/map/presenter/map_screen.dart';
 import 'package:geosave/app/features/save/presenter/save_screen.dart';
 
@@ -17,7 +16,6 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         AppRoutes.map: (context) => const MapScreen(),
-        AppRoutes.list: (context) => const ListAndarScreen(),
         AppRoutes.save: (context) => const SaveScreen(),
       },
     );
