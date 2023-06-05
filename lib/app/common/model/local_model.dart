@@ -5,9 +5,7 @@ class LocalModel extends LocalEntity {
     required super.id,
     required super.lat,
     required super.lon,
-    required super.marker,
     required super.nomeLocal,
-    required super.tipoLocal,
   });
 
   factory LocalModel.fromJson(Map<String, dynamic> json) {
@@ -15,20 +13,16 @@ class LocalModel extends LocalEntity {
       id: json['id'],
       lat: json['lat'],
       lon: json['lon'],
-      marker: json['marker'],
       nomeLocal: json['nomeLocal'],
-      tipoLocal: json['tipoLocal'],
     );
   }
 
-  Map<String, dynamic> toJson() {
-    Map<String, dynamic> data = {
+  Map<String, dynamic> toJson(Map<String, dynamic> data) {
+    data = {
       'id': id,
       'lat': lat,
       'lon': lon,
-      'marker': marker,
       'nomeLocal': nomeLocal,
-      'tipoLocal': tipoLocal,
     };
 
     return data;

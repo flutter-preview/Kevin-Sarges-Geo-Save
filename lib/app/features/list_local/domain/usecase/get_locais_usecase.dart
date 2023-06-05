@@ -8,7 +8,7 @@ class GetLocaisUseCase {
 
   GetLocaisUseCase({required this.repository});
 
-  Future<Either<Failure, List<LocalEntity>>> call(String andar) async {
-    return await repository.getLocais(andar);
+  Future<Either<Failure, List<LocalEntity>>> call() async {
+    return await repository.getLocais();
   }
 }

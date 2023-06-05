@@ -9,9 +9,9 @@ class LocalRepository implements LocalRepositoryImpl {
   LocalRepository({required this.dataSource});
 
   @override
-  Future<Either<Failure, void>> deleteLocal(String id, String andar) async {
+  Future<Either<Failure, void>> deleteLocal(String id) async {
     try {
-      final result = await dataSource.deleteLocal(id, andar);
+      final result = await dataSource.deleteLocal(id);
 
       return Right(result);
     } on Failure catch (e) {

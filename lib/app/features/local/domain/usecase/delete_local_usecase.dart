@@ -7,10 +7,7 @@ class DeleteLocalUseCase {
 
   DeleteLocalUseCase({required this.repository});
 
-  Future<Either<Failure, void>> call(
-    String id,
-    String andar,
-  ) async {
-    return await repository.deleteLocal(id, andar);
+  Future<Either<Failure, void>> call(String id) async {
+    return await repository.deleteLocal(id);
   }
 }

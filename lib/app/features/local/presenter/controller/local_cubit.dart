@@ -7,10 +7,10 @@ class LocalCubit extends Cubit<LocalState> {
 
   final DeleteLocalUseCase deleteLocalUseCase;
 
-  Future<void> delete(String id, String andar) async {
+  Future<void> delete(String id) async {
     emit(LocalCarregando());
 
-    final result = await deleteLocalUseCase(id, andar);
+    final result = await deleteLocalUseCase(id);
 
     result.fold(
       (erro) => emit(LocalErro(erro)),

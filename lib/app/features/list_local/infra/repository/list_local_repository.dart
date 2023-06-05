@@ -10,9 +10,9 @@ class ListLocalRepository implements ListLocalRepositoryImpl {
   ListLocalRepository({required this.dataSource});
 
   @override
-  Future<Either<Failure, List<LocalEntity>>> getLocais(String andar) async {
+  Future<Either<Failure, List<LocalEntity>>> getLocais() async {
     try {
-      final result = await dataSource.getLocais(andar);
+      final result = await dataSource.getLocais();
 
       return Right(result);
     } on Failure catch (e) {

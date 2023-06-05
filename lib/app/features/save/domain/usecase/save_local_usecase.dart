@@ -8,7 +8,7 @@ class SaveLocalUseCase {
 
   SaveLocalUseCase({required this.repository});
 
-  Future<Either<Failure, void>> call(LocalModel local, String andar) async {
-    return await repository.saveLocal(local, andar);
+  Future<Either<Failure, void>> call(LocalModel local) async {
+    return await repository.saveLocal(local);
   }
 }
