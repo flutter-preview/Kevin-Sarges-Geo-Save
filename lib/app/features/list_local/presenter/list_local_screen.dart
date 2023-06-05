@@ -55,7 +55,7 @@ class _ListLocalScreenState extends State<ListLocalScreen> {
                 if (state.locais.isEmpty) {
                   return const Center(
                     child: Text(
-                      'No moneto não tem\n nenhum local salvo !! 😢',
+                      'No momento não tem nenhum\nlocal salvo !!😢',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
