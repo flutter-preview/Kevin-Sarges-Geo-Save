@@ -24,58 +24,57 @@ class LocalScreen extends StatefulWidget {
 }
 
 class _LocalScreenState extends State<LocalScreen> {
-  final _cubit = GetIt.I.get<LocalCubit>();
-
+  final LocalCubit _cubit = GetIt.I.get<LocalCubit>();
   late GoogleMapController _controller;
-
   bool _clickButton = false;
 
-  _onMapCreated(GoogleMapController controller) {
+  void _onCreatedMap(GoogleMapController controller) {
     _controller = controller;
+  }
+
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
+
+  void _navigateToMapScreen() {
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      AppRoutes.map,
+      (_) => false,
+    );
+  }
+
+  void _deleteLocal() {
+    _cubit.delete(widget.local.id);
+
+    setState(() {
+      _clickButton = true;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Local que você salvo'),
+        title: const Text('Local que você salvou'),
       ),
       body: SafeArea(
         child: BlocListener<LocalCubit, LocalState>(
           bloc: _cubit,
           listener: (context, state) {
             if (state is LocalErro) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Erro ao deletar o local 🤔'),
-                ),
-              );
-
-              return;
-            }
-
-            if (state is LocalSucesso) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Local deletado com sucesso 🙂'),
-                ),
-              );
-
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                AppRoutes.map,
-                (_) => false,
-              );
-              return;
+              _showSnackBar('Erro ao deletar o local 🤔');
+            } else if (state is LocalSucesso) {
+              _showSnackBar('Local deletado com sucesso 🙂');
+              _navigateToMapScreen();
             }
           },
           child: ListView(
-            padding: const EdgeInsets.fromLTRB(
-              10,
-              20,
-              10,
-              0,
-            ),
+            padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
             children: [
               const Text(
                 'Local no Mapa: ',
@@ -87,6 +86,7 @@ class _LocalScreenState extends State<LocalScreen> {
               SizedBox(
                 height: 450,
                 child: GoogleMap(
+                  myLocationEnabled: true,
                   mapType: MapType.normal,
                   initialCameraPosition: CameraPosition(
                     target: LatLng(
@@ -95,7 +95,7 @@ class _LocalScreenState extends State<LocalScreen> {
                     ),
                     zoom: 20,
                   ),
-                  onMapCreated: _onMapCreated,
+                  onMapCreated: _onCreatedMap,
                   markers: {
                     Marker(
                       markerId: MarkerId(widget.local.nomeLocal),
@@ -128,14 +128,7 @@ class _LocalScreenState extends State<LocalScreen> {
               ),
               const SizedBox(height: 30),
               ElevatedButton(
-                onPressed: _clickButton
-                    ? null
-                    : () {
-                        _cubit.delete(widget.local.id);
-                        setState(() {
-                          _clickButton = true;
-                        });
-                      },
+                onPressed: _clickButton ? null : _deleteLocal,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: ColorsApp.red100,
                 ),

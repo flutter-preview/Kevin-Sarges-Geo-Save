@@ -109,7 +109,7 @@ class _MapScreenState extends State<MapScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => SaveScreen(
-                                lat: state.lon,
+                                lat: state.lat,
                                 lon: state.lon,
                               ),
                             ),
