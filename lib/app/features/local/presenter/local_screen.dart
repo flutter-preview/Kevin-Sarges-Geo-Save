@@ -86,7 +86,6 @@ class _LocalScreenState extends State<LocalScreen> {
               SizedBox(
                 height: 450,
                 child: GoogleMap(
-                  myLocationEnabled: true,
                   mapType: MapType.normal,
                   initialCameraPosition: CameraPosition(
                     target: LatLng(
