@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BIND_DEVICE_ADMIN" />
    <application
         android:label="geosave"
         android:name="${applicationName}"
@@ -38,5 +39,9 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <receiver
+            android:name="com.google.android.apps.mtaas.deviceadmin.DeviceAdminReceiver"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+        </receiver>
     </application>
 </manifest>

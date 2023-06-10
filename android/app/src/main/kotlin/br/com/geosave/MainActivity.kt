@@ -1,4 +1,4 @@
-package com.example.geosave
+package br.com.geosave
 
 import io.flutter.embedding.android.FlutterActivity
 
