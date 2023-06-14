@@ -41,7 +41,8 @@
             android:value="2" />
         <receiver
             android:name="com.google.android.apps.mtaas.deviceadmin.DeviceAdminReceiver"
-            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            android:permission="android.permission.BIND_DEVICE_ADMIN"
+            android:exported="false">
             <meta-data
                 android:name="android.app.device_admin"
                 android:resource="@xml/device_admin_receiver" />
