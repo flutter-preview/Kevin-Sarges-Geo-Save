@@ -1,5 +1,5 @@
 import 'package:geolocator/geolocator.dart';
 
-abstract class MapDataSourceImpl {
+abstract interface class MapDataSourceImpl {
   Future<Position> getGeoLocalizacaoUsuario();
 }
