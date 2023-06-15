@@ -1,19 +1,19 @@
 import 'package:geosave/app/common/entity/local_entity.dart';
 import 'package:geosave/app/common/error/failure.dart';
 
-abstract class ListLocalState {}
+abstract base class ListLocalState {}
 
-class ListLocalInitial extends ListLocalState {}
+final class ListLocalInitial extends ListLocalState {}
 
-class ListLocalCarregando extends ListLocalState {}
+final class ListLocalCarregando extends ListLocalState {}
 
-class ListLocalSucesso extends ListLocalState {
+final class ListLocalSucesso extends ListLocalState {
   List<LocalEntity> locais;
 
   ListLocalSucesso(this.locais);
 }
 
-class ListLocalErro extends ListLocalState {
+final class ListLocalErro extends ListLocalState {
   Failure erro;
 
   ListLocalErro(this.erro);
