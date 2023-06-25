@@ -1,14 +1,14 @@
 import 'package:geosave/app/common/error/failure.dart';
 
-abstract class LocalState {}
+abstract base class LocalState {}
 
-class LocalInitial extends LocalState {}
+final class LocalInitial extends LocalState {}
 
-class LocalCarregando extends LocalState {}
+final class LocalCarregando extends LocalState {}
 
-class LocalSucesso extends LocalState {}
+final class LocalSucesso extends LocalState {}
 
-class LocalErro extends LocalState {
+final class LocalErro extends LocalState {
   Failure erro;
 
   LocalErro(this.erro);
