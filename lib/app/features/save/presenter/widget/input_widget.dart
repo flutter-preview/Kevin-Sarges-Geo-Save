@@ -5,10 +5,8 @@ class InputWidget extends StatelessWidget {
     super.key,
     required this.controller,
     required this.hintText,
-    required this.label,
   });
 
-  final String label;
   final String hintText;
   final TextEditingController controller;
 
@@ -19,7 +17,6 @@ class InputWidget extends StatelessWidget {
       decoration: InputDecoration(
         border: const OutlineInputBorder(),
         hintText: hintText,
-        label: Text(label),
       ),
       validator: (String? value) {
         if (value == null || value.isEmpty) {
