@@ -7,7 +7,7 @@ import 'package:geosave/app/common/entity/local_entity.dart';
 import 'package:geosave/app/common/routes/app_routes.dart';
 import 'package:geosave/app/common/widget/appbar_widget.dart';
 import 'package:geosave/app/common/widget/text_button_widget.dart';
-import 'package:geosave/app/features/list_local/presenter/full_map_local_screen.dart';
+import 'package:geosave/app/features/local/presenter/full_map_local_screen.dart';
 import 'package:geosave/app/features/local/presenter/controller/local_cubit.dart';
 import 'package:geosave/app/features/local/presenter/controller/local_state.dart';
 import 'package:geosave/app/features/local/presenter/widget/template_row_widget.dart';
