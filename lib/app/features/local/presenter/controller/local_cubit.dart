@@ -30,7 +30,7 @@ class LocalCubit extends Cubit<LocalState> {
 
     result.fold(
       (erro) => emit(LocalErro(erro)),
-      (_) => emit(LocalSucesso()),
+      (_) => emit(UpdateLocalNome()),
     );
   }
 }
