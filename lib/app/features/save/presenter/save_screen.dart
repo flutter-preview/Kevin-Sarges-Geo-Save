@@ -44,12 +44,6 @@ class _SaveScreenState extends State<SaveScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: ColorsApp.white100,
-      //   iconTheme: const IconThemeData(
-      //     color: Colors.black,
-      //   ),
-      // ),
       body: SafeArea(
         child: BlocListener<SaveCubit, SaveState>(
           bloc: _cubit,
@@ -75,7 +69,11 @@ class _SaveScreenState extends State<SaveScreen> {
                 ),
               );
 
-              Navigator.pushReplacementNamed(context, AppRoutes.list);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                AppRoutes.list,
+                (_) => false,
+              );
               return;
             }
           },
@@ -83,7 +81,11 @@ class _SaveScreenState extends State<SaveScreen> {
             children: [
               AppBarWidget(
                 onPressed: () {
-                  Navigator.popAndPushNamed(context, AppRoutes.map);
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AppRoutes.map,
+                    (_) => false,
+                  );
                 },
               ),
               Expanded(

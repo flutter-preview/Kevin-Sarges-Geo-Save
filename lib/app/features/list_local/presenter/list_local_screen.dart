@@ -38,9 +38,10 @@ class _ListLocalScreenState extends State<ListLocalScreen> {
           child: Column(
             children: [
               AppBarWidget(onPressed: () {
-                Navigator.popAndPushNamed(
+                Navigator.pushNamedAndRemoveUntil(
                   context,
                   AppRoutes.map,
+                  (_) => false,
                 );
               }),
               const SizedBox(height: 20),
