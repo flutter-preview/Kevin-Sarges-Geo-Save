@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geosave/app/common/colors/colors_app.dart';
 import 'package:geosave/app/common/entity/local_entity.dart';
 import 'package:geosave/app/features/local/presenter/local_screen.dart';
 
@@ -28,16 +29,17 @@ class LocalContainer extends StatelessWidget {
       child: Container(
         width: width * 0.3,
         height: 50,
+        margin: const EdgeInsets.fromLTRB(0, 0, 0, 8),
         padding: const EdgeInsets.symmetric(
           horizontal: 10,
           vertical: 10,
         ),
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 216, 216, 216),
+          color: ColorsApp.white150,
           borderRadius: BorderRadius.circular(5),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Image.asset(
               'assets/images/pino-de-localizacao.png',

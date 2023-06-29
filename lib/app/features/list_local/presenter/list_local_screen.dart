@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geosave/app/common/colors/colors_app.dart';
+import 'package:geosave/app/common/routes/app_routes.dart';
+import 'package:geosave/app/common/widget/appbar_widget.dart';
 import 'package:geosave/app/common/widget/loading_widget.dart';
 import 'package:geosave/app/features/list_local/presenter/controller/list_local_cubit.dart';
 import 'package:geosave/app/features/list_local/presenter/controller/list_local_state.dart';
@@ -27,63 +29,83 @@ class _ListLocalScreenState extends State<ListLocalScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Lista de locais'),
-      ),
       body: SafeArea(
         child: RefreshIndicator(
           onRefresh: () {
             final locais = _cubit.getLocais();
             return locais;
           },
-          child: BlocBuilder<ListLocalCubit, ListLocalState>(
-            bloc: _cubit,
-            builder: (context, state) {
-              if (state is ListLocalCarregando) {
-                return const Center(
-                  child: LoadingWidget(),
+          child: Column(
+            children: [
+              AppBarWidget(onPressed: () {
+                Navigator.popAndPushNamed(
+                  context,
+                  AppRoutes.map,
                 );
-              }
-
-              if (state is ListLocalErro) {
-                return Center(
-                  child: Text(state.erro.errorMessage),
-                );
-              }
-
-              if (state is ListLocalSucesso) {
-                if (state.locais.isEmpty) {
-                  return const Center(
-                    child: Text(
-                      'No momento não tem nenhum\nlocal salvo !!😢',
+              }),
+              const SizedBox(height: 20),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Localizações salvas',
                       style: TextStyle(
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  );
-                } else {
-                  return GridView.builder(
-                    itemCount: state.locais.length,
-                    padding: const EdgeInsets.fromLTRB(12, 20, 12, 0),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                    ),
-                    itemBuilder: (context, index) {
-                      return LocalContainer(
-                        local: state.locais[index],
+                    Divider(),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: BlocBuilder<ListLocalCubit, ListLocalState>(
+                  bloc: _cubit,
+                  builder: (context, state) {
+                    if (state is ListLocalCarregando) {
+                      return const Center(
+                        child: LoadingWidget(),
                       );
-                    },
-                  );
-                }
-              }
+                    }
 
-              return Container(
-                color: ColorsApp.red100,
-              );
-            },
+                    if (state is ListLocalErro) {
+                      return Center(
+                        child: Text(state.erro.errorMessage),
+                      );
+                    }
+
+                    if (state is ListLocalSucesso) {
+                      if (state.locais.isEmpty) {
+                        return const Center(
+                          child: Text(
+                            'No momento não tem nenhum\nlocal salvo !!😢',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        );
+                      } else {
+                        return ListView.builder(
+                          itemCount: state.locais.length,
+                          padding: const EdgeInsets.fromLTRB(12, 20, 12, 0),
+                          itemBuilder: (context, index) {
+                            return LocalContainer(
+                              local: state.locais[index],
+                            );
+                          },
+                        );
+                      }
+                    }
+
+                    return Container(
+                      color: ColorsApp.red100,
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
         ),
       ),
