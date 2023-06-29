@@ -18,4 +18,15 @@ class LocalRepository implements LocalRepositoryImpl {
       return Left(e);
     }
   }
+
+  @override
+  Future<Either<Failure, void>> updateNome(String id, String novoNome) async {
+    try {
+      final result = await dataSource.updateNome(id, novoNome);
+
+      return Right(result);
+    } on Failure catch (e) {
+      return Left(e);
+    }
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:geosave/app/features/local/domain/datasource/ilocal_datasource.dart';
 import 'package:geosave/app/features/local/domain/repository/ilocal_repository.dart';
 import 'package:geosave/app/features/local/domain/usecase/delete_local_usecase.dart';
+import 'package:geosave/app/features/local/domain/usecase/update_nome_usecase.dart';
 import 'package:geosave/app/features/local/infra/datasource/local_datasource.dart';
 import 'package:geosave/app/features/local/infra/repository/local_repository.dart';
 import 'package:geosave/app/features/local/presenter/controller/local_cubit.dart';
@@ -20,8 +21,15 @@ class LocalInjectDependecy {
       () => DeleteLocalUseCase(repository: getIt()),
     );
 
+    getIt.registerFactory<UpdateNomeUseCase>(
+      () => UpdateNomeUseCase(repository: getIt()),
+    );
+
     getIt.registerFactory(
-      () => LocalCubit(deleteLocalUseCase: getIt()),
+      () => LocalCubit(
+        deleteLocalUseCase: getIt(),
+        updateNomeUseCase: getIt(),
+      ),
     );
   }
 }
