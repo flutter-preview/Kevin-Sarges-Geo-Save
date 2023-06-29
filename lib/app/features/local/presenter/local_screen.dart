@@ -7,6 +7,7 @@ import 'package:geosave/app/common/entity/local_entity.dart';
 import 'package:geosave/app/common/routes/app_routes.dart';
 import 'package:geosave/app/common/widget/appbar_widget.dart';
 import 'package:geosave/app/common/widget/text_button_widget.dart';
+import 'package:geosave/app/features/list_local/presenter/full_map_local_screen.dart';
 import 'package:geosave/app/features/local/presenter/controller/local_cubit.dart';
 import 'package:geosave/app/features/local/presenter/controller/local_state.dart';
 import 'package:geosave/app/features/local/presenter/widget/template_row_widget.dart';
@@ -45,6 +46,18 @@ class _LocalScreenState extends State<LocalScreen> {
     );
   }
 
+  void _navigatorFullMap() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FullMapLocalScreen(
+          lat: widget.local.lat,
+          lon: widget.local.lon,
+        ),
+      ),
+    );
+  }
+
   void _navigateToMapScreen() {
     Navigator.pushNamedAndRemoveUntil(
       context,
@@ -70,6 +83,13 @@ class _LocalScreenState extends State<LocalScreen> {
     setState(() {
       _clickUpdate = false;
       widget.local.nomeLocal = _controllerText.text;
+    });
+  }
+
+  void _editNome() {
+    setState(() {
+      _clickUpdate = true;
+      _controllerText.text = widget.local.nomeLocal;
     });
   }
 
@@ -149,11 +169,7 @@ class _LocalScreenState extends State<LocalScreen> {
                                   ),
                                   IconButton(
                                     onPressed: () {
-                                      setState(() {
-                                        _clickUpdate = true;
-                                        _controllerText.text =
-                                            widget.local.nomeLocal;
-                                      });
+                                      _editNome();
                                     },
                                     icon: const Icon(Icons.edit),
                                   ),
@@ -172,7 +188,9 @@ class _LocalScreenState extends State<LocalScreen> {
                           ),
                         ),
                         TextButtonWidget(
-                          onPressed: () {},
+                          onPressed: () {
+                            _navigatorFullMap();
+                          },
                           text: 'Ver mapa completo',
                         )
                       ],
