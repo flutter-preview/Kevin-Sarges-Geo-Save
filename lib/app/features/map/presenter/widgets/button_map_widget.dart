@@ -13,15 +13,25 @@ class ButtoMapWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPress,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: ColorsApp.green100,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+    return InkWell(
+      onTap: onPress,
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: 12,
+          horizontal: 50,
+        ),
+        decoration: BoxDecoration(
+          color: ColorsApp.green150,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Text(
+          text,
+          style: const TextStyle(
+            color: ColorsApp.white100,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
-      child: Text(text),
     );
   }
 }

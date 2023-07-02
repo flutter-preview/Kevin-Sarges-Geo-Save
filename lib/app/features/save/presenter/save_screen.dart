@@ -6,6 +6,7 @@ import 'package:geosave/app/common/colors/colors_app.dart';
 import 'package:geosave/app/common/helpers/open_database.dart';
 import 'package:geosave/app/common/model/local_model.dart';
 import 'package:geosave/app/common/routes/app_routes.dart';
+import 'package:geosave/app/common/widget/appbar_widget.dart';
 import 'package:geosave/app/features/save/presenter/controller/save_cubit.dart';
 import 'package:geosave/app/features/save/presenter/controller/save_state.dart';
 import 'package:geosave/app/features/save/presenter/widget/input_widget.dart';
@@ -43,9 +44,6 @@ class _SaveScreenState extends State<SaveScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Salvar Localização'),
-      ),
       body: SafeArea(
         child: BlocListener<SaveCubit, SaveState>(
           bloc: _cubit,
@@ -71,102 +69,92 @@ class _SaveScreenState extends State<SaveScreen> {
                 ),
               );
 
-              Navigator.pushReplacementNamed(context, AppRoutes.list);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                AppRoutes.list,
+                (_) => false,
+              );
               return;
             }
           },
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(
-              19,
-              52,
-              19,
-              0,
-            ),
-            child: ListView(
-              children: [
-                const Center(
-                  child: Text(
-                    'Sua latitude e longitude',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 33),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(
+            children: [
+              AppBarWidget(
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AppRoutes.map,
+                    (_) => false,
+                  );
+                },
+              ),
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.fromLTRB(18, 20, 18, 0),
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Latitude:',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                        ),
-                        Text(
-                          widget.lat.toString(),
-                        ),
-                      ],
+                    const Text(
+                      'Salvar Localização',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Longitude:',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                    const Divider(),
+                    const SizedBox(height: 20),
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Nome do Local',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        Text(widget.lon.toString()),
-                      ],
+                          const SizedBox(height: 5),
+                          InputWidget(
+                            controller: _controllerTextNomeLocal,
+                            hintText: 'Ex: Escola',
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: _clickButton
+                          ? null
+                          : () {
+                              if (_formKey.currentState!.validate()) {
+                                _cubit.saveLocal(
+                                  LocalModel(
+                                    id: uuid.v4(),
+                                    lat: widget.lat,
+                                    lon: widget.lon,
+                                    nomeLocal: _controllerTextNomeLocal.text,
+                                  ),
+                                );
+
+                                setState(() {
+                                  _clickButton = true;
+                                });
+                              }
+                            },
+                      child: _clickButton
+                          ? const SizedBox(
+                              width: 10,
+                              height: 10,
+                              child: CircularProgressIndicator(
+                                color: ColorsApp.white100,
+                              ),
+                            )
+                          : const Text('Salvar'),
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
-                Form(
-                  key: _formKey,
-                  child: InputWidget(
-                    controller: _controllerTextNomeLocal,
-                    hintText: 'Ex: Escola',
-                    label: 'Nome para o local:',
-                  ),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: _clickButton
-                      ? null
-                      : () {
-                          if (_formKey.currentState!.validate()) {
-                            _cubit.saveLocal(
-                              LocalModel(
-                                id: uuid.v4(),
-                                lat: widget.lat,
-                                lon: widget.lon,
-                                nomeLocal: _controllerTextNomeLocal.text,
-                              ),
-                            );
-
-                            setState(() {
-                              _clickButton = true;
-                            });
-                          }
-                        },
-                  child: _clickButton
-                      ? const SizedBox(
-                          width: 10,
-                          height: 10,
-                          child: CircularProgressIndicator(
-                            color: ColorsApp.white100,
-                          ),
-                        )
-                      : const Text('Salvar'),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

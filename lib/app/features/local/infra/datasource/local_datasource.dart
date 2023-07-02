@@ -21,4 +21,20 @@ class LocalDataSource implements LocalDataSourceImpl {
       throw CommonDesconhecidoError(message: e.toString());
     }
   }
+
+  @override
+  Future<void> updateNome(String id, String novoNome) async {
+    try {
+      final update = await _openDb.openDb();
+
+      await update.update(
+        StringsApp.nomeTabela,
+        {StringsApp.nomeLocal: novoNome},
+        where: 'id = ?',
+        whereArgs: [id],
+      );
+    } on DatabaseException catch (e) {
+      throw CommonDesconhecidoError(message: e.toString());
+    }
+  }
 }

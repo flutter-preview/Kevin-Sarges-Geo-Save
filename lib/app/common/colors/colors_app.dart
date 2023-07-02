@@ -8,4 +8,5 @@ class ColorsApp {
   static const Color white150 = Color(0xFFECF1EC);
   static const Color white200 = Color(0xFFEAEAEA);
   static const Color red100 = Color(0xFFEB2222);
+  static const Color blue100 = Color(0xFF5B7CAD);
 }

@@ -8,6 +8,8 @@ final class LocalCarregando extends LocalState {}
 
 final class LocalSucesso extends LocalState {}
 
+final class UpdateLocalNome extends LocalState {}
+
 final class LocalErro extends LocalState {
   Failure erro;
 
